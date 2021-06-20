@@ -26,37 +26,28 @@ const HomeScreen = ({ match }) => {
 	}, [dispatch, keyword, pageNumber]);
 
 	return (
-		<div
-			className="mt-5 row"
-			style={{ zIndex: '0', backgroundColor: '#000000' }}
-		>
+		<div className="mt-5 row" style={{ zIndex: '0' }}>
 			<Meta />
 			{keyword && (
-				<Link to="/" className="btn btn-light">
+				<Link
+					to="/"
+					type="button"
+					className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+				>
 					Go Back
 				</Link>
 			)}
-			<h1 className="text-center text-white">Latest Products</h1>
+			<h1 className="text-center">Latest Products</h1>
 			{loading ? (
 				<Loader />
 			) : error ? (
 				<Message variant="danger">{error}</Message>
 			) : (
-				<div className="w-100  mx-auto mt-5 d-flex justify-content-center align-itmes-center flex-column">
-					{/* <Row> */}
-					{/* <Product product={product} /> */}
+				<div className="grid md:grid-cols-4 gap-4">
 					{products?.map((product) => (
-						// <Col key={product._id} sm={12} md={12} lg={12} xl={12}>
-
-						<ProductItem id={product._id} product={product} />
-						// </Col>
+						<ProductItem key={product._id} product={product} />
 					))}
-					{/* </Row> */}
-					{/* <div className="p-8">
-					
-					
-					
-					</div> */}
+
 					<Paginate
 						pages={pages}
 						page={page}

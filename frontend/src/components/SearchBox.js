@@ -24,7 +24,7 @@ const SearchBox = ({ history }) => {
 			<Form.Control
 				type="text"
 				name="q"
-				style={{ fontSize: '16px !important', backgroundColor: '#000000' }}
+				style={{ fontSize: '16px !important' }}
 				onChange={(e) => setKeyword(e.target.value)}
 				placeholder="Search Products..."
 				className="mr-sm-2 ml-sm-5 mb-2 mt-2 rounded border-0 w-100"

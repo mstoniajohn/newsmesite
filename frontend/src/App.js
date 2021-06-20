@@ -20,13 +20,15 @@ import ProductEditScreen from './screens/ProductEditScreen';
 import OrderListScreen from './screens/OrderListScreen';
 import SmeHome from './components/pages/SmeHome';
 import Studio from './components/pages/Studio';
+import NavHeader from './components/NavHeader';
 
 const App = () => {
 	return (
 		<Router>
-			<Header />
-			<div style={{ background: '#000000' }}>
-				<main className="py-3 mx-auto" style={{ maxWidth: '800px' }}>
+			{/* <Header /> */}
+			<NavHeader />
+			<div>
+				<main className="py-3 mx-auto">
 					<Container>
 						<Route path="/order/:id" component={OrderScreen} />
 						<Route path="/shipping" component={ShippingScreen} />

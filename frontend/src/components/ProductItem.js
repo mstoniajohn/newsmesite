@@ -5,18 +5,19 @@ import Rating from './Rating';
 
 const ProductItem = ({ product }) => {
 	return (
-		<div className="my-3 rounded d-flex flex-column border-none align-items-center mb-5 mt-5 bg-white">
+		<div className="my-3 rounded shadow-md d-flex flex-column border-none align-items-center mb-5 mt-5 bg-white">
 			<Link to={`/product/${product._id}`}>
 				<img
 					className="mb-2 img-fluid mx-auto"
 					src={product.image}
+					width="230"
 
 					// style={{ width: '100%' }}
 				/>
 			</Link>
 
 			<Link to={`/product/${product._id}`}>
-				<div className="text-center text-dark h5">
+				<div className="text-center h5">
 					<strong>{product.name}</strong>
 				</div>
 			</Link>

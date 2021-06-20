@@ -1,10 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300&display=swap');
-body,
-html {
-	font-family: 'Oswald', sans-serif;
-	background-color: black;
-}
+@import url('https://unpkg.com/@tailwindcss/typography@0.2.x/dist/typography.min.css');
+@import url('https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css');
 
+body,
 main {
 	min-height: 80vh;
 }

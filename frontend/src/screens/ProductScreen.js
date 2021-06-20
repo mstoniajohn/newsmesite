@@ -67,15 +67,32 @@ const ProductScreen = ({ history, match }) => {
 
 	return (
 		<>
-			<Link className="btn btn-light my-3" to="/">
-				Go Back
+			<Link
+				to="/"
+				type="button"
+				className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+			>
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					className="h-6 w-6"
+					fill="none"
+					viewBox="0 0 24 24"
+					stroke="currentColor"
+				>
+					<path
+						strokeLinecap="round"
+						strokeLinejoin="round"
+						strokeWidth={2}
+						d="M12 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2M3 12l6.414 6.414a2 2 0 001.414.586H19a2 2 0 002-2V7a2 2 0 00-2-2h-8.172a2 2 0 00-1.414.586L3 12z"
+					/>
+				</svg>
 			</Link>
 			{loading ? (
 				<Loader />
 			) : error ? (
 				<Message variant="danger">{error}</Message>
 			) : (
-				<div style={{ zIndex: '0' }}>
+				<div className="mt-6" style={{ zIndex: '0' }}>
 					<Meta title={product.name} />
 					<Row>
 						<Col md={6}>
@@ -143,14 +160,14 @@ const ProductScreen = ({ history, match }) => {
 									)}
 
 									<ListGroup.Item>
-										<Button
+										<button
 											onClick={addToCartHandler}
-											className="btn-block"
+											className="mx-auto px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
 											type="button"
 											disabled={product.countInStock === 0}
 										>
 											Add To Cart
-										</Button>
+										</button>
 									</ListGroup.Item>
 								</ListGroup>
 							</Card>
@@ -206,13 +223,13 @@ const ProductScreen = ({ history, match }) => {
 													onChange={(e) => setComment(e.target.value)}
 												></Form.Control>
 											</Form.Group>
-											<Button
+											<button
 												disabled={loadingProductReview}
 												type="submit"
-												variant="primary"
+												className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
 											>
 												Submit
-											</Button>
+											</button>
 										</Form>
 									) : (
 										<Message>
