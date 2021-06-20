@@ -4,7 +4,6 @@ import { Popover, Transition } from '@headlessui/react';
 import {
 	BookmarkAltIcon,
 	CalendarIcon,
-	ChartBarIcon,
 	CursorClickIcon,
 	MenuIcon,
 	PhoneIcon,
@@ -12,8 +11,13 @@ import {
 	RefreshIcon,
 	ShieldCheckIcon,
 	SupportIcon,
+	UsersIcon,
 	ViewGridIcon,
+	ShoppingCartIcon,
 	XIcon,
+	ViewBoardsIcon,
+	StatusOnlineIcon,
+	StatusOfflineIcon,
 } from '@heroicons/react/outline';
 import { FaShoppingCart } from 'react-icons/fa';
 import { ChevronDownIcon } from '@heroicons/react/solid';
@@ -31,19 +35,19 @@ const solutions = [
 		description:
 			'Get a better understanding of where your traffic is coming from.',
 		to: '/admin/userlist',
-		icon: ChartBarIcon,
+		icon: UsersIcon,
 	},
 	{
 		name: 'Products',
 		description: 'Speak directly to your customers in a more meaningful way.',
 		to: '/admin/productlist',
-		icon: CursorClickIcon,
+		icon: ViewGridIcon,
 	},
 	{
 		name: 'Orders',
 		description: "Your customers' data will be safe and secure.",
 		to: '/admin/orderlist',
-		icon: ShieldCheckIcon,
+		icon: ViewBoardsIcon,
 	},
 ];
 const callsToAction = [
@@ -75,6 +79,9 @@ const NavHeader = () => {
 	const dispatch = useDispatch();
 
 	const userLogin = useSelector((state) => state.userLogin);
+	const cart = useSelector((state) => state.cart);
+	const { cartItems } = cart;
+
 	const { userInfo } = userLogin;
 
 	const logoutHandler = () => {
@@ -82,7 +89,7 @@ const NavHeader = () => {
 	};
 
 	return (
-		<Popover className="relative bg-white">
+		<Popover className="relative bg-white z-50">
 			{({ open }) => (
 				<>
 					<div className="max-w-7xl mx-auto px-4 sm:px-6">
@@ -149,7 +156,7 @@ const NavHeader = () => {
 																	<Link
 																		key={item.name}
 																		to={item.to}
-																		className="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50"
+																		className="-m-3 p-2 flex items-start rounded-lg hover:bg-gray-50"
 																	>
 																		<item.icon
 																			className="flex-shrink-0 h-6 w-6 text-indigo-600"
@@ -169,16 +176,16 @@ const NavHeader = () => {
 															<div className="px-5 py-5 bg-gray-50 space-y-6 sm:flex sm:space-y-0 sm:space-x-10 sm:px-8">
 																{callsToAction.map((item) => (
 																	<div key={item.name} className="flow-root">
-																		<a
-																			href={item.href}
-																			className="-m-3 p-3 flex items-center rounded-md text-base font-medium text-gray-900 hover:bg-gray-100"
+																		<Link
+																			href={item.to}
+																			className="-m-3 p-2 flex items-center rounded-md text-base font-medium text-gray-900 hover:bg-gray-100"
 																		>
 																			<item.icon
 																				className="flex-shrink-0 h-6 w-6 text-gray-400"
 																				aria-hidden="true"
 																			/>
 																			<span className="ml-3">{item.name}</span>
-																		</a>
+																		</Link>
 																	</div>
 																))}
 															</div>
@@ -192,9 +199,26 @@ const NavHeader = () => {
 
 								<Link
 									to="/cart"
-									className="text-base font-medium text-gray-500 hover:text-gray-900"
+									className="-m-3 relative text-base font-medium text-gray-500 hover:text-gray-900 p-2"
 								>
-									<FaShoppingCart />
+									{/* <ShoppingCartIcon /> */}
+									<svg
+										xmlns="http://www.w3.org/2000/svg"
+										className="h-6 w-6 "
+										fill="none"
+										viewBox="0 0 24 24"
+										stroke="currentColor"
+									>
+										<path
+											strokeLinecap="round"
+											strokeLinejoin="round"
+											strokeWidth={2}
+											d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
+										/>
+									</svg>
+									<span className="absolute top-0 right-0 text-indigo-500 ">
+										{cartItems.reduce((acc, item) => acc + item.qty, 0)}
+									</span>
 								</Link>
 								{userInfo && (
 									<Popover className="relative">
@@ -235,8 +259,8 @@ const NavHeader = () => {
 																{resources.map((item) => (
 																	<Link
 																		key={item.name}
-																		to={item.href}
-																		className="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50"
+																		to={item.to}
+																		className="-m-3 p-2 flex items-start rounded-lg hover:bg-gray-50"
 																	>
 																		<item.icon
 																			className="flex-shrink-0 h-6 w-6 text-indigo-600"
@@ -264,6 +288,7 @@ const NavHeader = () => {
 							<div className="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
 								{!userInfo && (
 									<>
+										<StatusOfflineIcon className="ml-2 h-5 w-5 group-hover:text-indigo-500 text-indigo-300" />
 										<Link
 											to="/login"
 											className="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900"
@@ -281,15 +306,29 @@ const NavHeader = () => {
 								)}
 								{userInfo && (
 									<>
-										<a href="#!" onClick={logoutHandler}>
-											Logout
-										</a>
+										<StatusOnlineIcon className="ml-2 h-5 w-5 group-hover:text-indigo-500 text-indigo-300" />
 										<Link
 											to="/profile"
-											className="ml-4 whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900"
+											className=" whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900"
 										>
-											Profile
+											Profile{' '}
 										</Link>
+										<a className="ml-4" href="#!" onClick={logoutHandler}>
+											<svg
+												xmlns="http://www.w3.org/2000/svg"
+												className="h-6 w-6"
+												fill="none"
+												viewBox="0 0 24 24"
+												stroke="currentColor"
+											>
+												<path
+													strokeLinecap="round"
+													strokeLinejoin="round"
+													strokeWidth={2}
+													d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
+												/>
+											</svg>
+										</a>
 									</>
 								)}
 							</div>
@@ -331,9 +370,9 @@ const NavHeader = () => {
 									<div className="mt-6">
 										<nav className="grid gap-y-8">
 											{solutions.map((item) => (
-												<a
+												<Link
 													key={item.name}
-													href={item.href}
+													to={item.to}
 													className="-m-3 p-3 flex items-center rounded-md hover:bg-gray-50"
 												>
 													<item.icon
@@ -343,52 +382,60 @@ const NavHeader = () => {
 													<span className="ml-3 text-base font-medium text-gray-900">
 														{item.name}
 													</span>
-												</a>
+												</Link>
 											))}
 										</nav>
 									</div>
 								</div>
 								<div className="py-6 px-5 space-y-6">
 									<div className="grid grid-cols-2 gap-y-4 gap-x-8">
-										<a
-											href="#"
-											className="text-base font-medium text-gray-900 hover:text-gray-700"
-										>
-											Pricing
-										</a>
-
-										<a
-											href="#"
-											className="text-base font-medium text-gray-900 hover:text-gray-700"
-										>
-											Docs
-										</a>
 										{resources.map((item) => (
-											<a
+											<Link
 												key={item.name}
-												href={item.href}
+												to={item.to}
 												className="text-base font-medium text-gray-900 hover:text-gray-700"
 											>
 												{item.name}
-											</a>
+											</Link>
 										))}
 									</div>
 									<div>
-										<a
-											href="#"
-											className="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700"
-										>
-											Sign up
-										</a>
-										<p className="mt-6 text-center text-base font-medium text-gray-500">
-											Existing customer?{' '}
-											<a
-												href="#"
-												className="text-indigo-600 hover:text-indigo-500"
-											>
-												Sign in
+										{!userInfo ? (
+											<>
+												<Link
+													to="/register"
+													className="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700"
+												>
+													Sign up
+												</Link>
+												<p className="mt-6 text-center text-base font-medium text-gray-500">
+													Existing customer?{' '}
+													<Link
+														to="/login"
+														className="text-indigo-600 hover:text-indigo-500"
+													>
+														Sign in
+													</Link>
+												</p>
+											</>
+										) : (
+											<a href="#!" onClick={logoutHandler}>
+												<svg
+													xmlns="http://www.w3.org/2000/svg"
+													className="h-6 w-6"
+													fill="none"
+													viewBox="0 0 24 24"
+													stroke="currentColor"
+												>
+													<path
+														strokeLinecap="round"
+														strokeLinejoin="round"
+														strokeWidth={2}
+														d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
+													/>
+												</svg>
 											</a>
-										</p>
+										)}
 									</div>
 								</div>
 							</div>

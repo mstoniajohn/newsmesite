@@ -26,7 +26,7 @@ const HomeScreen = ({ match }) => {
 	}, [dispatch, keyword, pageNumber]);
 
 	return (
-		<div className="mt-5 row" style={{ zIndex: '0' }}>
+		<div className="mt-5 row">
 			<Meta />
 			{keyword && (
 				<Link

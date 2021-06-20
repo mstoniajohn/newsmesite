@@ -92,7 +92,7 @@ const ProductScreen = ({ history, match }) => {
 			) : error ? (
 				<Message variant="danger">{error}</Message>
 			) : (
-				<div className="mt-6" style={{ zIndex: '0' }}>
+				<div className="mt-6">
 					<Meta title={product.name} />
 					<Row>
 						<Col md={6}>
