@@ -26,7 +26,10 @@ const HomeScreen = ({ match }) => {
 	}, [dispatch, keyword, pageNumber]);
 
 	return (
-		<div className="mt-5" style={{ zIndex: '0', backgroundColor: '#000000' }}>
+		<div
+			className="mt-5 row"
+			style={{ zIndex: '0', backgroundColor: '#000000' }}
+		>
 			<Meta />
 			{keyword && (
 				<Link to="/" className="btn btn-light">
@@ -39,10 +42,10 @@ const HomeScreen = ({ match }) => {
 			) : error ? (
 				<Message variant="danger">{error}</Message>
 			) : (
-				<div className="w-100 mx-auto mt-5 d-flex justify-content-center align-itmes-center flex-column">
+				<div className="w-100  mx-auto mt-5 d-flex justify-content-center align-itmes-center flex-column">
 					{/* <Row> */}
 					{/* <Product product={product} /> */}
-					{products.map((product) => (
+					{products?.map((product) => (
 						// <Col key={product._id} sm={12} md={12} lg={12} xl={12}>
 
 						<ProductItem id={product._id} product={product} />
