@@ -96,7 +96,7 @@ const NavHeader = () => {
 						<div className="flex justify-between items-center border-b-2 border-gray-100 py-6 md:justify-start md:space-x-10">
 							<div className="flex justify-start lg:w-0 lg:flex-1">
 								<Link to="/">
-									<span className="sr-only">SME Shop</span>
+									<span className="sr-only">SME</span>
 									<img
 										className="h-8 w-auto sm:h-10"
 										src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
@@ -196,6 +196,12 @@ const NavHeader = () => {
 										)}
 									</Popover>
 								)}
+								<Link
+									to="/shop"
+									className="-m-3 text-base font-medium text-gray-500 hover:text-gray-900 p-2"
+								>
+									<span>Shop</span>
+								</Link>
 
 								<Link
 									to="/cart"

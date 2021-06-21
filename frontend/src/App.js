@@ -33,7 +33,7 @@ const App = () => {
 						<Route path="/order/:id" component={OrderScreen} />
 						<Route path="/shipping" component={ShippingScreen} />
 						<Route path="/payment" component={PaymentScreen} />
-						<Route exact path="/shop" component={SmeHome} />
+						<Route exact path="/" component={SmeHome} />
 						<Route path="/studio" component={Studio} />
 
 						<Route path="/placeorder" component={PlaceOrderScreen} />
@@ -66,7 +66,7 @@ const App = () => {
 							component={HomeScreen}
 							exact
 						/>
-						<Route path="/" component={HomeScreen} exact />
+						<Route path="/shop" component={HomeScreen} exact />
 					</Container>
 				</main>
 
